@@ -70,63 +70,22 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown("f") && timer <= 0)
         {
-            StartCoroutine(dash());
-
-            var deltaX = Input.GetAxisRaw("Horizontal");
-            var deltaY = Input.GetAxisRaw("Vertical");
-
-            Vector2 movement = new Vector2(deltaX, deltaY).normalized;
-
-            if(Input.GetAxisRaw("Horizontal") > 0)
+            if (Input.GetKeyDown("f") && timer <= 0)
             {
-                rb2d.velocity = new Vector2(2, 0) * speed * Time.fixedDeltaTime;
-            }
-            else if(Input.GetAxisRaw("Horizontal") < 0)
-            {
-                rb2d.velocity = new Vector2(-2, 0) * speed * Time.fixedDeltaTime;
-            }
-            if(Input.GetAxisRaw("Vertical") > 0)
-            {
-                rb2d.velocity = new Vector2(0, 2) * speed * Time.fixedDeltaTime;
+                Vector3 mousePosScreen = Input.mousePosition;
+                Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(new Vector3(mousePosScreen.x, mousePosScreen.y, transform.position.z - Camera.main.transform.position.z));
+                Vector3 direction = mousePosWorld - transform.position;
 
-            }
-            else if (Input.GetAxisRaw("Vertical") < 0)
-            {
-                rb2d.velocity = new Vector2(0, -2) * speed * Time.fixedDeltaTime;
-            }
-            if(Input.GetAxisRaw("Vertical") > 0 && Input.GetAxisRaw("Horizontal") > 0)
-            {
-                rb2d.velocity = new Vector2(1, 1) * speed * Time.fixedDeltaTime;
+                direction.Normalize();
 
-            }
-            else if (Input.GetAxisRaw("Vertical") < 0 && Input.GetAxisRaw("Horizontal") < 0)
-            {
-                rb2d.velocity = new Vector2(-1, -1) * speed * Time.fixedDeltaTime;
-            }
-            else if (Input.GetAxisRaw("Vertical") > 0 && Input.GetAxisRaw("Horizontal") < 0)
-            {
-                rb2d.velocity = new Vector2(-1, 1) * speed * Time.fixedDeltaTime;
-            }
-            else if (Input.GetAxisRaw("Vertical") < 0 && Input.GetAxisRaw("Horizontal") > 0)
-            {
-                rb2d.velocity = new Vector2(1, -1) * speed * Time.fixedDeltaTime;
-            }
-            else
-            {
-                if(transform.localScale.x == -1.5f)
-                {
-                    rb2d.velocity = new Vector2(-2, 0) * speed * Time.fixedDeltaTime;
+                float speed = 16f;
+                Vector3 velocity = direction * speed;
 
-                }
-                else
-                {
-                    rb2d.velocity = new Vector2(2, 0) * speed * Time.fixedDeltaTime;
+                rb2d.velocity = velocity;
 
-                }
+                StartCoroutine(dash());
+                timer = 0.4f;
             }
-
-
-            timer = 0.4f;
         }
 
     }
