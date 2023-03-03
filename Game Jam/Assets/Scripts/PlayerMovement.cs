@@ -85,6 +85,32 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb2d.velocity = new Vector2(-2, 0) * speed * Time.fixedDeltaTime;
             }
+            if(Input.GetAxisRaw("Vertical") > 0)
+            {
+                rb2d.velocity = new Vector2(0, 2) * speed * Time.fixedDeltaTime;
+
+            }
+            else if (Input.GetAxisRaw("Vertical") < 0)
+            {
+                rb2d.velocity = new Vector2(0, -2) * speed * Time.fixedDeltaTime;
+            }
+            if(Input.GetAxisRaw("Vertical") > 0 && Input.GetAxisRaw("Horizontal") > 0)
+            {
+                rb2d.velocity = new Vector2(1, 1) * speed * Time.fixedDeltaTime;
+
+            }
+            else if (Input.GetAxisRaw("Vertical") < 0 && Input.GetAxisRaw("Horizontal") < 0)
+            {
+                rb2d.velocity = new Vector2(-1, -1) * speed * Time.fixedDeltaTime;
+            }
+            else if (Input.GetAxisRaw("Vertical") > 0 && Input.GetAxisRaw("Horizontal") < 0)
+            {
+                rb2d.velocity = new Vector2(-1, 1) * speed * Time.fixedDeltaTime;
+            }
+            else if (Input.GetAxisRaw("Vertical") < 0 && Input.GetAxisRaw("Horizontal") > 0)
+            {
+                rb2d.velocity = new Vector2(1, -1) * speed * Time.fixedDeltaTime;
+            }
             else
             {
                 if(transform.localScale.x == -1.5f)
