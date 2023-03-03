@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Seith
   layers:
   - Default
   - TransparentFX
@@ -40,4 +41,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Below all
+    uniqueID: 1016592149
+    locked: 0
+  - name: Below player
+    uniqueID: 3427417091
+    locked: 0
+  - name: Player
+    uniqueID: 2035790759
+    locked: 0
+  - name: Above player
+    uniqueID: 846274341
+    locked: 0
+  - name: Above all
+    uniqueID: 2727936923
+    locked: 0
+  - name: UI
+    uniqueID: 2243188349
     locked: 0
