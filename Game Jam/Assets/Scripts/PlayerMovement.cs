@@ -10,11 +10,15 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb2d;
     private SpriteRenderer sprite;
 
+    public float mana;
+
     public Transform weapon;
 
-    public float currentSpeed;
+    private float currentSpeed;
 
-    float timer = 0.4f;
+    float elapsed = 0;
+
+    float timer = 1f;
 
     bool canMove = true;
 
@@ -25,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        mana = 100;
+
         rb2d = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -50,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    
     private void Update()
     {
         anim.SetFloat("speed", currentSpeed);
@@ -59,7 +66,14 @@ public class PlayerMovement : MonoBehaviour
             timer -= 1 * Time.deltaTime;
         }
 
-        if(currentSpeed > 0.1f)
+        elapsed += Time.deltaTime;
+        if (elapsed >= 2f && mana < 96)
+        {
+            elapsed = elapsed % 1f;
+            mana += 5;
+        }
+
+        if (currentSpeed > 0.1f)
         {
             dustParticles.Play();
         }
@@ -68,9 +82,9 @@ public class PlayerMovement : MonoBehaviour
             dustParticles.Stop();
         }
 
-        if (Input.GetKeyDown("f") && timer <= 0)
+        if (Input.GetKeyDown("f") && timer <= 0 && mana > 24)
         {
-            if (Input.GetKeyDown("f") && timer <= 0)
+            if (Input.GetKeyDown("f") && timer <= 0 && mana > 24)
             {
                 Vector3 mousePosScreen = Input.mousePosition;
                 Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(new Vector3(mousePosScreen.x, mousePosScreen.y, transform.position.z - Camera.main.transform.position.z));
@@ -84,7 +98,8 @@ public class PlayerMovement : MonoBehaviour
                 rb2d.velocity = velocity;
 
                 StartCoroutine(dash());
-                timer = 0.4f;
+                mana -= 25;
+                timer = 1f;
             }
         }
 
