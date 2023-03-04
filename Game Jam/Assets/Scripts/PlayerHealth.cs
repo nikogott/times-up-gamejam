@@ -7,8 +7,13 @@ public class PlayerHealth : MonoBehaviour
     BatteryBar batteryBar;
     float battery;
     Animator anim;
+    PlayerMovement playerMovement;
+
+    [SerializeField] GameObject deathMenu;
+
     void Start()
     {
+        playerMovement = FindObjectOfType<PlayerMovement>();
         anim = GetComponent<Animator>();
         battery = 75;
         batteryBar = FindObjectOfType<BatteryBar>();
@@ -16,7 +21,6 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-
         if(Input.GetKeyDown(KeyCode.L) && battery <= 50)
         {
             TakeDamage(25);
@@ -45,7 +49,20 @@ public class PlayerHealth : MonoBehaviour
 
     void TakeDamage(int damage)
     {
-        anim.SetTrigger("hit");
-        battery -= damage;
+        if(battery <= 10)
+        {
+            Death();
+        }
+        if (!playerMovement.isDashing)
+        {
+            anim.SetTrigger("hit");
+            battery -= damage;
+        }
+    }
+
+    void Death()
+    {
+        Time.timeScale = 0;
+        deathMenu.SetActive(true);
     }
 }

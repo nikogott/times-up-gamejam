@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
 
     GameObject weaponObj;
 
+    public bool isDashing = false;
+
     void Start()
     {
         mana = 100;
@@ -118,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator dash()
     {
-        coll.enabled = false;
+        isDashing = true;
         anim.SetTrigger("dash");
         speed = speed * 1.75f;
         canMove = false;
@@ -126,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
-        coll.enabled = true;
+        isDashing = false;
         dashParticles.Stop();
         canMove = true;
         speed = speed / 1.75f;
@@ -136,6 +138,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(collision.CompareTag("Blood"))
         {
+            if(mana < 100)
             mana += 5;
         }
     }
