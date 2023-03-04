@@ -114,19 +114,8 @@ public class EnemyAI : MonoBehaviour
                         bullet.GetComponent<Rigidbody2D>().AddForce(gun.transform.right * bullet.GetComponent<Bullet>().speed, ForceMode2D.Impulse);
                     }
                 }
-                else if (gunType == "Uzi" || gunType == "uzi")
-                {
-                    float spread = Random.Range(-1.5f, 1.5f);
 
-                    GameObject bullet = Instantiate(bulletPrefab, shotPos.position, gun.transform.rotation);
-                    Vector2 direction = (playerTransform.position - shotPos.position).normalized;
-                    direction.x += spread;
-                    bullet.GetComponent<Rigidbody2D>().velocity = direction * bullet.GetComponent<Bullet>().speed;
-
-                    fireTimer = fireRate / 15;
-                }
-
-                shootCooldown = Time.time + shootCooldownDuration / 15;
+                shootCooldown = Time.time + shootCooldownDuration;
             }
         }
     }

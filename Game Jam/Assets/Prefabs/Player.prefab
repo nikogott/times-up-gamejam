@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4367844849073682740}
   - component: {fileID: 4367844849073682739}
   - component: {fileID: 4367844849073682738}
+  - component: {fileID: 1150884163}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2035790759
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -1804063954, guid: f26f89204fe3baf43a85f12c38143e43, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -121,14 +122,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4367844849073683145}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -151,6 +152,7 @@ MonoBehaviour:
   weapon: {fileID: 4367844850506114622}
   dustParticles: {fileID: 4367844849671320649}
   dashParticles: {fileID: 4367844849863639416}
+  isDashing: 0
 --- !u!114 &4367844849073682739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +171,7 @@ MonoBehaviour:
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
   m_SelfShadows: 0
-  m_ApplyToSortingLayers: 0000000015f7973c033c4acca7b35779251f71329b0399a27d56b485
+  m_ApplyToSortingLayers: 0000000055b6e61015f7973c033c4acca7b35779251f71329b0399a27d56b485
   m_ShapePath:
   - {x: -0.34314016, y: -0.49684456, z: 0}
   - {x: -0.3437518, y: -0.37567028, z: 0}
@@ -195,7 +197,7 @@ MonoBehaviour:
   - {x: 0.34892637, y: -0.50000006, z: 0}
   m_ShapePathHash: 1109452292
   m_Mesh: {fileID: 0}
-  m_InstanceId: -106608
+  m_InstanceId: -17078
   m_LocalBounds:
     m_Center: {x: -0.0005146861, y: -0.03186667, z: 0}
     m_Extent: {x: 0.4059739, y: 0.4681334, z: 0}
@@ -215,6 +217,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0.028517883, y: -0.03259186}
   m_Size: {x: 0.5762094, y: 0.9103725}
   m_Direction: 0
+--- !u!114 &1150884163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4367844849073683145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fcc833264cc6b84d8cfc1a9ffa16ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battery: 0
+  deathMenu: {fileID: 0}
 --- !u!1001 &3788371699768447769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -222,6 +238,54 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4367844849073682742}
     m_Modifications:
+    - target: {fileID: 580766725586489952, guid: de9894b7865a0ab479bfd931041c38df, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 315a5a81dfaf3744e8577870e12e15c3, type: 2}
+    - target: {fileID: 580766725586489953, guid: de9894b7865a0ab479bfd931041c38df, type: 3}
+      propertyPath: TrailModule.ribbonCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 580766725586489953, guid: de9894b7865a0ab479bfd931041c38df, type: 3}
+      propertyPath: TrailModule.widthOverTrail.scalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 580766725586489953, guid: de9894b7865a0ab479bfd931041c38df, type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 580766725586489953, guid: de9894b7865a0ab479bfd931041c38df, type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 580766725586489953, guid: de9894b7865a0ab479bfd931041c38df, type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 580766725586489953, guid: de9894b7865a0ab479bfd931041c38df, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 580766725586489953, guid: de9894b7865a0ab479bfd931041c38df, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 580766725586489953, guid: de9894b7865a0ab479bfd931041c38df, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 580766725586489953, guid: de9894b7865a0ab479bfd931041c38df, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.minColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 580766725586489953, guid: de9894b7865a0ab479bfd931041c38df, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.minColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 580766725586489953, guid: de9894b7865a0ab479bfd931041c38df, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.minColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 580766725586489955, guid: de9894b7865a0ab479bfd931041c38df, type: 3}
       propertyPath: m_Name
       value: Dash_particles
@@ -368,6 +432,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 1.042
       objectReference: {fileID: 0}
+    - target: {fileID: 7778094271505711959, guid: 5aa037dba9092d5479411de5093f1b94, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.979171
+      objectReference: {fileID: 0}
+    - target: {fileID: 7778094271505711959, guid: 5aa037dba9092d5479411de5093f1b94, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.20303747
+      objectReference: {fileID: 0}
+    - target: {fileID: 7778094271505711960, guid: 5aa037dba9092d5479411de5093f1b94, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7778094272207773122, guid: 5aa037dba9092d5479411de5093f1b94, type: 3}
       propertyPath: playerPos
       value: 
@@ -424,13 +500,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Holder
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7778094271505711957, guid: 5aa037dba9092d5479411de5093f1b94, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5aa037dba9092d5479411de5093f1b94, type: 3}
 --- !u!4 &4367844848729274541 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7778094272207773124, guid: 5aa037dba9092d5479411de5093f1b94, type: 3}
   m_PrefabInstance: {fileID: 6299660909278586217}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4367844850506114609 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7778094271505711960, guid: 5aa037dba9092d5479411de5093f1b94, type: 3}
+  m_PrefabInstance: {fileID: 6299660909278586217}
+  m_PrefabAsset: {fileID: 0}
+--- !u!70 &2029034064
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4367844850506114609}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.010544296, y: 0.6877291}
+  m_Size: {x: 1.6460968, y: 0.6245529}
+  m_Direction: 0
 --- !u!4 &4367844850506114622 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7778094271505711959, guid: 5aa037dba9092d5479411de5093f1b94, type: 3}

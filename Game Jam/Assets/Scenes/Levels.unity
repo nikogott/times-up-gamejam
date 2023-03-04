@@ -419,8 +419,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 726344277}
   m_HandleRect: {fileID: 726344276}
   m_Direction: 2
-  m_Value: 0.49999976
-  m_Size: 0.7869221
+  m_Value: 0.5
+  m_Size: 0.48290914
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1236,6 +1236,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingPanel: {fileID: 1949953525}
+  pauseMenu: {fileID: 0}
+  shouldLoad: 0
+  shouldPause: 0
 --- !u!4 &1125930555
 Transform:
   m_ObjectHideFlags: 0
@@ -1446,7 +1449,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -315, y: -164}
+  m_AnchoredPosition: {x: -286, y: -138}
   m_SizeDelta: {x: 1420.69, y: 484.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1365458458
@@ -2323,7 +2326,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6451324}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.74966973
+  m_Size: 0.7496697
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
