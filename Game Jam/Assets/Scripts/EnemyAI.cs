@@ -4,96 +4,74 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public float moveSpeed = 3f;
-    public float detectionRange = 5f;
-    public float shootingRange = 3f;
-    public float shootingDelay = 1f;
+    public Transform playerTransform;
     public GameObject bulletPrefab;
-    public Transform shootPosition;
+    public Transform gun;
+    public Transform shotPos;
 
-    private Rigidbody2D rb;
-    private Transform playerTransform;
+    public float detectionRange = 10f;
+    public float shootingRange = 5f;
+    public float moveSpeed = 5f;
+    public float maxOffset = 3f;
+    public float fireRate = 1f;
+
+    private float fireTimer;
     private bool canShoot;
-    private float timeSinceLastShot;
-    private Vector2 moveDirection;
-    private float moveDuration;
-    private float timeSinceLastMove;
-    private float rotationSpeed = 180f;
-    [SerializeField] Animator animGun;
-    [SerializeField] Animator anim;
-    float currentSpeed;
 
-    [SerializeField] GameObject gunObj;
-    [SerializeField] ParticleSystem shootParticles; 
+    private Vector2 targetPosition;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        canShoot = false;
-        timeSinceLastShot = 0f;
-        timeSinceLastMove = 0f;
-        moveDirection = Vector2.zero;
-        moveDuration = 0f;
-        anim = GetComponent<Animator>();
+        Vector2 offset = Random.insideUnitCircle * maxOffset;
+        targetPosition = (Vector2)playerTransform.position + offset;
 
+        fireTimer = fireRate;
     }
 
     void Update()
     {
-        currentSpeed = rb.velocity.sqrMagnitude;
-        anim.SetFloat("speed", currentSpeed);
-
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
-        if(distanceToPlayer > 5 && distanceToPlayer < detectionRange)
+        if (distanceToPlayer < detectionRange)
         {
-            Vector2 direction = (playerTransform.position - transform.position).normalized;
+            Vector2 direction = (playerTransform.position - gun.position).normalized;
+            gun.right = direction;
 
-            gunObj.transform.right = direction;
-            transform.Translate(direction * 5 * Time.deltaTime);
             canShoot = (distanceToPlayer < shootingRange);
-        }
-        else if(distanceToPlayer > detectionRange)
-        {
-            canShoot = false;
-        }
-        /*if (distanceToPlayer < detectionRange)
-        {
-            if (distanceToPlayer < 5)
+
+            if (distanceToPlayer > shootingRange)
             {
-                Vector2 directionToPlayer = (playerTransform.position - transform.position).normalized;
-                float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
-                Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                gunObj.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-                moveDirection = directionToPlayer;
-
-                rb.velocity = moveDirection * moveSpeed;
-
+                transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, moveSpeed * Time.deltaTime);
             }
-            canShoot = (distanceToPlayer < shootingRange);
         }
         else
         {
-            canShoot = false;
-        }*/
+            if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
+            {
+                Vector2 offset = Random.insideUnitCircle * maxOffset;
+                targetPosition = (Vector2)playerTransform.position + offset;
+            }
+
+            Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
+            transform.Translate(direction * moveSpeed * Time.deltaTime);
+
+            if (Quaternion.Angle(gun.rotation, Quaternion.identity) > 0.1f)
+            {
+                gun.rotation = Quaternion.Lerp(gun.rotation, Quaternion.identity, 0.1f);
+            }
+        }
 
         if (canShoot)
         {
-            if (timeSinceLastShot >= shootingDelay)
-            {
-                animGun.SetTrigger("shoot");
-                shootParticles.Play();
+            fireTimer -= Time.deltaTime;
 
-                GameObject bullet = Instantiate(bulletPrefab, shootPosition.position, gunObj.transform.rotation);
-                bullet.GetComponent<Rigidbody2D>().velocity = (playerTransform.position - transform.position).normalized * bullet.GetComponent<Bullet>().speed;
-                timeSinceLastShot = 0f;
-
-            }
-            else
+            if (fireTimer <= 0f)
             {
-                timeSinceLastShot += Time.deltaTime;
+                GameObject bullet = Instantiate(bulletPrefab, shotPos.position, Quaternion.identity);
+                Vector2 direction = (playerTransform.position - shotPos.position).normalized;
+                bullet.GetComponent<Rigidbody2D>().velocity = direction * bullet.GetComponent<Bullet>().speed;
+
+                fireTimer = fireRate;
             }
         }
     }
