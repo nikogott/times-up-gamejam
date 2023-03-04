@@ -27,7 +27,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ParticleSystem dustParticles;
     [SerializeField] ParticleSystem dashParticles;
 
+    Collider2D coll;
+
     ManaBar manaBar;
+
+    GameObject weaponObj;
 
     void Start()
     {
@@ -36,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-
+        coll = GetComponent<Collider2D>();
         manaBar = FindObjectOfType<ManaBar>();
     }
 
@@ -114,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator dash()
     {
+        coll.enabled = false;
         anim.SetTrigger("dash");
         speed = speed * 1.75f;
         canMove = false;
@@ -121,6 +126,7 @@ public class PlayerMovement : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
+        coll.enabled = true;
         dashParticles.Stop();
         canMove = true;
         speed = speed / 1.75f;

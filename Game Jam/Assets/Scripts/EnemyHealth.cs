@@ -5,14 +5,12 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int health;
-    float timer = 0.2f;
-    float ogTimer;
+    float timer = 0.1f;
     [SerializeField] GameObject bloodObj;
     bool shouldSpawnBlood = false;
     void Start()
     {
         health = 3;
-        ogTimer = timer;
     }
 
     void Update()
@@ -29,8 +27,8 @@ public class EnemyHealth : MonoBehaviour
                 spawnBlood();
                 shouldSpawnBlood = false;
             }
-
         }
+
     }
 
     void spawnBlood()
@@ -52,7 +50,7 @@ public class EnemyHealth : MonoBehaviour
         if(collision.CompareTag("Seith"))
         {
             health -= 1;
-            timer = ogTimer;
+            timer = .1f;
         }
     }
 }
