@@ -8,6 +8,8 @@ public class EnemyHealth : MonoBehaviour
     float timer = 0.1f;
     [SerializeField] GameObject bloodObj;
     bool shouldSpawnBlood = false;
+
+    public GameObject seith;
     void Start()
     {
         health = 3;
@@ -17,7 +19,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (timer > 0)
         {
-            timer -= 1 * Time.deltaTime;
+            timer -= Time.deltaTime;
         }
         if(health <= 0)
         {
@@ -29,6 +31,13 @@ public class EnemyHealth : MonoBehaviour
             }
         }
 
+        float distanceToSeith = Vector2.Distance(transform.position, seith.transform.position);
+        if (distanceToSeith < 0.5 && seith.CompareTag("Seith") && timer <= 0.0)
+        {
+            Debug.Log("Attacked");
+            health -= 1;
+            timer = 1f;    
+        }
     }
 
     void spawnBlood()
@@ -44,13 +53,5 @@ public class EnemyHealth : MonoBehaviour
 
         }
         Destroy(gameObject);
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Seith"))
-        {
-            health -= 1;
-            timer = .1f;
-        }
     }
 }

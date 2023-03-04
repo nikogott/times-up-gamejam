@@ -43,7 +43,20 @@ public class EnemyAI : MonoBehaviour
         anim.SetFloat("speed", currentSpeed);
 
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-        if (distanceToPlayer < detectionRange)
+
+        if(distanceToPlayer > 5 && distanceToPlayer < detectionRange)
+        {
+            Vector2 direction = (playerTransform.position - transform.position).normalized;
+
+            gunObj.transform.right = direction;
+            transform.Translate(direction * 5 * Time.deltaTime);
+            canShoot = (distanceToPlayer < shootingRange);
+        }
+        else if(distanceToPlayer > detectionRange)
+        {
+            canShoot = false;
+        }
+        /*if (distanceToPlayer < detectionRange)
         {
             if (distanceToPlayer < 5)
             {
@@ -62,7 +75,7 @@ public class EnemyAI : MonoBehaviour
         else
         {
             canShoot = false;
-        }
+        }*/
 
         if (canShoot)
         {

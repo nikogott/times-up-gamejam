@@ -36,5 +36,4 @@ public class PlayerAttack : MonoBehaviour
         transform.gameObject.tag = "Untagged";
 
     }
-
 }
