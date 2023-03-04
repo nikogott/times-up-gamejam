@@ -24,7 +24,7 @@ public class EnemyHealth : MonoBehaviour
         {
             timer -= Time.deltaTime;
         }
-        if(health <= 0)
+        if (health <= 0)
         {
             shouldSpawnBlood = true;
             if (shouldSpawnBlood)
@@ -32,16 +32,6 @@ public class EnemyHealth : MonoBehaviour
                 spawnBlood();
                 shouldSpawnBlood = false;
             }
-        }
-
-        float distanceToSeith = Vector2.Distance(transform.position, seith.transform.position);
-        if (distanceToSeith < 0.5 && seith.CompareTag("Seith") && timer <= 0.0)
-        {
-            Debug.Log("Attacked");
-            health -= 1;
-            timer = 1f;
-            ApplyKnockback(player.gameObject.transform.position, kbForce);
-
         }
     }
 
@@ -64,5 +54,15 @@ public class EnemyHealth : MonoBehaviour
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.AddForce(-direction * force, ForceMode2D.Impulse);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Seith") && timer <= 0.1)
+        {
+            health -= 1;
+            timer = 1f;
+            //ApplyKnockback(player.gameObject.transform.position, kbForce);
+        }
     }
 }

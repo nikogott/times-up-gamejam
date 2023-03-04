@@ -31,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
     {
         transform.gameObject.tag = "Seith";
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(.8f);
 
         transform.gameObject.tag = "Untagged";
 
