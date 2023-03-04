@@ -9,16 +9,24 @@ public class EnemyAI : MonoBehaviour
     public Transform gun;
     public Transform shotPos;
 
+    private Rigidbody2D rb2d;
+
     public float detectionRange = 10f;
     public float shootingRange = 5f;
     public float moveSpeed = 5f;
     public float maxOffset = 3f;
     public float fireRate = 1f;
 
+    float shootCooldown = 0f;
+    float shootCooldownDuration = 1f;
+
+    public string gunType = "";
     private float fireTimer;
     private bool canShoot;
 
     private Vector2 targetPosition;
+    private int maxDeviationAngle = 5;
+    private int recoilForce = 5;
 
     void Start()
     {
@@ -65,16 +73,32 @@ public class EnemyAI : MonoBehaviour
         {
             fireTimer -= Time.deltaTime;
 
-            if (fireTimer <= 0f)
+            if (fireTimer <= 0f && Time.time > shootCooldown)
             {
-                float spread = Random.Range(-1.5f, 1.5f);
+                if (gunType == "Pistol")
+                {
+                    float spread = Random.Range(-1.5f, 1.5f);
 
-                GameObject bullet = Instantiate(bulletPrefab, shotPos.position, gun.transform.rotation);
-                Vector2 direction = (playerTransform.position - shotPos.position).normalized;
-                direction.x += spread;
-                bullet.GetComponent<Rigidbody2D>().velocity = direction * bullet.GetComponent<Bullet>().speed;
+                    GameObject bullet = Instantiate(bulletPrefab, shotPos.position, gun.transform.rotation);
+                    Vector2 direction = (playerTransform.position - shotPos.position).normalized;
+                    direction.x += spread;
+                    bullet.GetComponent<Rigidbody2D>().velocity = direction * bullet.GetComponent<Bullet>().speed;
 
-                fireTimer = fireRate;
+                    fireTimer = fireRate;
+                }
+                else if (gunType == "Shotgun")
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        GameObject bullet = Instantiate(bulletPrefab, shotPos.position, gun.transform.rotation);
+
+                        float randomRotation = Random.Range(-15, 15);
+                        bullet.transform.Rotate(0f, 0f, randomRotation);
+
+                        bullet.GetComponent<Rigidbody2D>().AddForce(gun.transform.right * bullet.GetComponent<Bullet>().speed, ForceMode2D.Impulse);
+                    }
+                }
+                shootCooldown = Time.time + shootCooldownDuration;
             }
         }
     }
