@@ -67,8 +67,11 @@ public class EnemyAI : MonoBehaviour
 
             if (fireTimer <= 0f)
             {
-                GameObject bullet = Instantiate(bulletPrefab, shotPos.position, Quaternion.identity);
+                float spread = Random.Range(-1.5f, 1.5f);
+
+                GameObject bullet = Instantiate(bulletPrefab, shotPos.position, gun.transform.rotation);
                 Vector2 direction = (playerTransform.position - shotPos.position).normalized;
+                direction.x += spread;
                 bullet.GetComponent<Rigidbody2D>().velocity = direction * bullet.GetComponent<Bullet>().speed;
 
                 fireTimer = fireRate;

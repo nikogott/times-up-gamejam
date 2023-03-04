@@ -10,11 +10,14 @@ public class EnemyHealth : MonoBehaviour
     bool shouldSpawnBlood = false;
     [SerializeField] float kbForce;
     PlayerMovement player;
+    [SerializeField] GameObject deathParticles;
+    Animator anim;
 
     public GameObject seith;
     void Start()
     {
-        health = 3;
+        anim = GetComponent<Animator>();
+        health = 1;
         player = FindObjectOfType<PlayerMovement>();
     }
 
@@ -26,6 +29,8 @@ public class EnemyHealth : MonoBehaviour
         }
         if (health <= 0)
         {
+            anim.SetTrigger("death");
+
             shouldSpawnBlood = true;
             if (shouldSpawnBlood)
             {
@@ -47,7 +52,8 @@ public class EnemyHealth : MonoBehaviour
             Instantiate(bloodObj, new Vector2(transform.position.x + randPosX, transform.position.y + randPosY), Quaternion.identity);
 
         }
-        Destroy(gameObject);
+        Instantiate(deathParticles, transform.position, Quaternion.identity);
+        Destroy(gameObject, 0.25f);
     }
 
     public void ApplyKnockback(Vector2 direction, float force)
@@ -60,9 +66,22 @@ public class EnemyHealth : MonoBehaviour
     {
         if (collision.CompareTag("Seith") && timer <= 0.1)
         {
-            health -= 1;
-            timer = 1f;
-            //ApplyKnockback(player.gameObject.transform.position, kbForce);
+            Hit();
+        }
+        if (collision.CompareTag("Explosion"))
+        {
+            Hit();
         }
     }
+
+    void Hit()
+    {
+        {
+            anim.SetTrigger("hit");
+            health -= 1;
+            timer = 1f;
+            ApplyKnockback(player.gameObject.transform.position, kbForce);
+        }
+    }
+
 }

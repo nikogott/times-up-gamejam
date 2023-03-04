@@ -8,6 +8,8 @@ TagManager:
   - Blood
   - Enemy
   - Bullet
+  - Barrel
+  - Explosion
   layers:
   - Default
   - TransparentFX
@@ -17,8 +19,8 @@ TagManager:
   - UI
   - bullet
   - seith
-  - 
-  - 
+  - floor
+  - explosion
   - 
   - 
   - 
@@ -44,6 +46,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Floor
+    uniqueID: 283555413
     locked: 0
   - name: Below all
     uniqueID: 1016592149

@@ -6,8 +6,10 @@ public class PlayerHealth : MonoBehaviour
 {
     BatteryBar batteryBar;
     float battery;
+    Animator anim;
     void Start()
     {
+        anim = GetComponent<Animator>();
         battery = 75;
         batteryBar = FindObjectOfType<BatteryBar>();
     }
@@ -17,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.L) && battery <= 50)
         {
-            battery += 25;
+            TakeDamage(25);
         }
     }
 
@@ -30,15 +32,20 @@ public class PlayerHealth : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {
-            battery -= 25;
+            TakeDamage(25);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Bullet") || collision.gameObject.CompareTag("Enemy"))
         {
-            battery -= 25;
-
+            TakeDamage(25);
         }
+    }
+
+    void TakeDamage(int damage)
+    {
+        anim.SetTrigger("hit");
+        battery -= damage;
     }
 }
