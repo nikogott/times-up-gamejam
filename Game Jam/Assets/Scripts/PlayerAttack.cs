@@ -29,11 +29,11 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator attack()
     {
-        transform.tag = "Seith";
+        transform.gameObject.tag = "Seith";
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
 
-        transform.tag = "Untagged";
+        transform.gameObject.tag = "Untagged";
 
     }
 

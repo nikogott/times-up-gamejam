@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ParticleSystem dustParticles;
     [SerializeField] ParticleSystem dashParticles;
 
+    ManaBar manaBar;
+
     void Start()
     {
         mana = 100;
@@ -34,10 +36,15 @@ public class PlayerMovement : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+
+        manaBar = FindObjectOfType<ManaBar>();
     }
 
     void FixedUpdate()
     {
+
+        manaBar.SetMana(mana);
+
         currentSpeed = rb2d.velocity.SqrMagnitude();
 
         var deltaX = Input.GetAxisRaw("Horizontal");
@@ -67,10 +74,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         elapsed += Time.deltaTime;
-        if (elapsed >= 2f && mana < 96)
+        if (elapsed >= .4f && mana < 100)
         {
-            elapsed = elapsed % 1f;
-            mana += 5;
+            elapsed = elapsed % .4f;
+            mana += 1;
         }
 
         if (currentSpeed > 0.1f)
@@ -117,6 +124,14 @@ public class PlayerMovement : MonoBehaviour
         dashParticles.Stop();
         canMove = true;
         speed = speed / 1.75f;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Blood"))
+        {
+            mana += 5;
+        }
     }
 
 }

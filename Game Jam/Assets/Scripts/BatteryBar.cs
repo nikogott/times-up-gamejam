@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ManaBar : MonoBehaviour
+public class BatteryBar : MonoBehaviour
 {
     public Slider slider;
     public Gradient gradient;
@@ -13,14 +13,14 @@ public class ManaBar : MonoBehaviour
 
     private Coroutine fillCoroutine;
 
-    public void SetMana(float mana)
+    public void SetBattery(float battery)
     {
         if (fillCoroutine != null)
         {
             StopCoroutine(fillCoroutine);
         }
 
-        fillCoroutine = StartCoroutine(FillSliderCoroutine(mana));
+        fillCoroutine = StartCoroutine(FillSliderCoroutine(battery));
     }
 
     private IEnumerator FillSliderCoroutine(float targetValue)

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Seith
+  - Blood
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4367844849073682738}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,8 +147,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 300
+  mana: 0
   weapon: {fileID: 4367844850506114622}
-  currentSpeed: 0
   dustParticles: {fileID: 4367844849671320649}
   dashParticles: {fileID: 4367844849863639416}
 --- !u!114 &4367844849073682739
@@ -195,7 +195,7 @@ MonoBehaviour:
   - {x: 0.34892637, y: -0.50000006, z: 0}
   m_ShapePathHash: 1109452292
   m_Mesh: {fileID: 0}
-  m_InstanceId: -68722
+  m_InstanceId: -106608
   m_LocalBounds:
     m_Center: {x: -0.0005146861, y: -0.03186667, z: 0}
     m_Extent: {x: 0.4059739, y: 0.4681334, z: 0}
@@ -360,10 +360,22 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7778094271505711957, guid: 5aa037dba9092d5479411de5093f1b94, type: 3}
+      propertyPath: m_InstanceId
+      value: -106630
+      objectReference: {fileID: 0}
+    - target: {fileID: 7778094271505711959, guid: 5aa037dba9092d5479411de5093f1b94, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.042
+      objectReference: {fileID: 0}
     - target: {fileID: 7778094272207773122, guid: 5aa037dba9092d5479411de5093f1b94, type: 3}
       propertyPath: playerPos
       value: 
       objectReference: {fileID: 4367844849073682742}
+    - target: {fileID: 7778094272207773122, guid: 5aa037dba9092d5479411de5093f1b94, type: 3}
+      propertyPath: smoothtime
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 7778094272207773124, guid: 5aa037dba9092d5479411de5093f1b94, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -410,7 +422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7778094272207773127, guid: 5aa037dba9092d5479411de5093f1b94, type: 3}
       propertyPath: m_Name
-      value: GameObject
+      value: Holder
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5aa037dba9092d5479411de5093f1b94, type: 3}
