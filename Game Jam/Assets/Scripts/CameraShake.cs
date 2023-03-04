@@ -28,8 +28,8 @@ public class CameraShake : MonoBehaviour
 
             yield return new WaitForSeconds(randomTime);
 
-            int randomX = Random.Range(-2, 2);
-            int randomY = Random.Range(-2, 2);
+            int randomX = Random.Range(-1, 2);
+            int randomY = Random.Range(-1, 2);
 
             transform.position = new Vector3(transform.position.x + randomX, transform.position.y + randomY, -10);
         }
