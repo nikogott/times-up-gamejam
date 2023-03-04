@@ -19,7 +19,8 @@ public class EnemyAI : MonoBehaviour
     private float moveDuration;
     private float timeSinceLastMove;
     private float rotationSpeed = 180f;
-    Animator anim;
+    [SerializeField] Animator animGun;
+    [SerializeField] Animator anim;
     float currentSpeed;
 
     [SerializeField] GameObject gunObj;
@@ -35,6 +36,7 @@ public class EnemyAI : MonoBehaviour
         moveDirection = Vector2.zero;
         moveDuration = 0f;
         anim = GetComponent<Animator>();
+
     }
 
     void Update()
@@ -81,7 +83,7 @@ public class EnemyAI : MonoBehaviour
         {
             if (timeSinceLastShot >= shootingDelay)
             {
-                anim.SetTrigger("shoot");
+                animGun.SetTrigger("shoot");
                 shootParticles.Play();
 
                 GameObject bullet = Instantiate(bulletPrefab, shootPosition.position, gunObj.transform.rotation);

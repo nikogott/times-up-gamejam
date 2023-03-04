@@ -8,11 +8,14 @@ public class EnemyHealth : MonoBehaviour
     float timer = 0.1f;
     [SerializeField] GameObject bloodObj;
     bool shouldSpawnBlood = false;
+    [SerializeField] float kbForce;
+    PlayerMovement player;
 
     public GameObject seith;
     void Start()
     {
         health = 3;
+        player = FindObjectOfType<PlayerMovement>();
     }
 
     void Update()
@@ -36,7 +39,9 @@ public class EnemyHealth : MonoBehaviour
         {
             Debug.Log("Attacked");
             health -= 1;
-            timer = 1f;    
+            timer = 1f;
+            ApplyKnockback(player.gameObject.transform.position, kbForce);
+
         }
     }
 
@@ -53,5 +58,11 @@ public class EnemyHealth : MonoBehaviour
 
         }
         Destroy(gameObject);
+    }
+
+    public void ApplyKnockback(Vector2 direction, float force)
+    {
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.AddForce(-direction * force, ForceMode2D.Impulse);
     }
 }
