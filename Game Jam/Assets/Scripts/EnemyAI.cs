@@ -40,11 +40,6 @@ public class EnemyAI : MonoBehaviour
 
         fireTimer = fireRate;
 
-    }
-
-    void Update()
-    {
-
         if (gunType == "pistol" || gunType == "Pistol")
         {
             gunSprite.sprite = pistolSprite;
@@ -53,6 +48,10 @@ public class EnemyAI : MonoBehaviour
         {
             gunSprite.sprite = shotgunSprite;
         }
+    }
+
+    void Update()
+    {
 
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
