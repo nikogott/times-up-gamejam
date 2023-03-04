@@ -28,16 +28,32 @@ public class EnemyAI : MonoBehaviour
     private int maxDeviationAngle = 5;
     private int recoilForce = 5;
 
+    [SerializeField] Sprite pistolSprite;
+    [SerializeField] Sprite shotgunSprite;
+
+    [SerializeField] SpriteRenderer gunSprite;
+
     void Start()
     {
         Vector2 offset = Random.insideUnitCircle * maxOffset;
         targetPosition = (Vector2)playerTransform.position + offset;
 
         fireTimer = fireRate;
+
     }
 
     void Update()
     {
+
+        if (gunType == "pistol" || gunType == "Pistol")
+        {
+            gunSprite.sprite = pistolSprite;
+        }
+        else if (gunType == "shotgun" || gunType == "Shotgun")
+        {
+            gunSprite.sprite = shotgunSprite;
+        }
+
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
         if (distanceToPlayer < detectionRange)
@@ -75,7 +91,7 @@ public class EnemyAI : MonoBehaviour
 
             if (fireTimer <= 0f && Time.time > shootCooldown)
             {
-                if (gunType == "Pistol")
+                if (gunType == "Pistol" || gunType == "pistol")
                 {
                     float spread = Random.Range(-1.5f, 1.5f);
 
@@ -86,7 +102,7 @@ public class EnemyAI : MonoBehaviour
 
                     fireTimer = fireRate;
                 }
-                else if (gunType == "Shotgun")
+                else if (gunType == "Shotgun" || gunType == "shotgun")
                 {
                     for (int i = 0; i < 5; i++)
                     {

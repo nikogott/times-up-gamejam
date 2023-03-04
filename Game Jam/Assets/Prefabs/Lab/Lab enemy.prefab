@@ -394,6 +394,10 @@ MonoBehaviour:
   moveSpeed: 2
   maxOffset: 5
   fireRate: 2
+  gunType: 
+  pistolSprite: {fileID: 69196129, guid: e384aecaa46138b41ad810d5b559d3fb, type: 3}
+  shotgunSprite: {fileID: -1791313690, guid: a0320abae80adb44ca6cd0369bdc7f97, type: 3}
+  gunSprite: {fileID: 65814569}
 --- !u!114 &8369360604989260175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,7 +413,7 @@ MonoBehaviour:
   health: 0
   bloodObj: {fileID: 432044983975113903, guid: 0aa93a4d8bc6fa646afa3a6148fd353f, type: 3}
   kbForce: 1
-  deathParticles: {fileID: 0}
+  deathParticles: {fileID: 7169062369480967953, guid: 37240a8ba24c03848a01016962fe071c, type: 3}
   seith: {fileID: 0}
 --- !u!114 &342582094
 MonoBehaviour:
@@ -443,7 +447,7 @@ MonoBehaviour:
   - {x: -0.2027696, y: -0.34874126, z: 0}
   m_ShapePathHash: -1933030726
   m_Mesh: {fileID: 0}
-  m_InstanceId: -43706
+  m_InstanceId: -268740
   m_LocalBounds:
     m_Center: {x: 0.007080257, y: -0.005874604, z: 0}
     m_Extent: {x: 0.39552516, y: 0.46038064, z: 0}

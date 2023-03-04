@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e384aecaa46138b41ad810d5b559d3fb
+guid: 64bc4ceb30f85da4897db009d4d4e545
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,22 +117,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: gun-shoot-spritesheet_0
+      name: lab-paper_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 14
-        width: 19
-        height: 16
+        x: 3
+        y: 2
+        width: 28
+        height: 27
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e0aa63af2e29d747aa32acdf92153df
-      internalID: 69196129
+      spriteID: 0883c01aa36cb6d45ac3f18b63c2b509
+      internalID: 1486785885
       vertices: []
       indices: 
       edges: []
@@ -148,10 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      gun-shoot-spritesheet_0: 69196129
-      gun-shoot-spritesheet_1: 1715516135
-      gun-shoot-spritesheet_2: -816824838
-      gun-shoot-spritesheet_3: 1868648600
+      lab-paper_0: 1486785885
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

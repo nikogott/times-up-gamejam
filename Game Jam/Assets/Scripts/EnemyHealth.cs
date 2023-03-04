@@ -42,7 +42,7 @@ public class EnemyHealth : MonoBehaviour
 
     void spawnBlood()
     {
-        int bloodAmount = Random.Range(3, 7);
+        int bloodAmount = Random.Range(2, 5);
 
 
         for (int i = 0; i <= bloodAmount; i++)

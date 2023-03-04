@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     BatteryBar batteryBar;
-    float battery;
+    public float battery;
     Animator anim;
     PlayerMovement playerMovement;
 
@@ -19,16 +19,13 @@ public class PlayerHealth : MonoBehaviour
         batteryBar = FindObjectOfType<BatteryBar>();
     }
 
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.L) && battery <= 50)
-        {
-            TakeDamage(25);
-        }
-    }
-
     private void FixedUpdate()
     {
+        if (battery <= 0)
+        {
+            Death();
+        }
+
         batteryBar.SetBattery(battery);
     }
 
@@ -49,10 +46,7 @@ public class PlayerHealth : MonoBehaviour
 
     void TakeDamage(int damage)
     {
-        if(battery <= 10)
-        {
-            Death();
-        }
+
         if (!playerMovement.isDashing)
         {
             anim.SetTrigger("hit");
