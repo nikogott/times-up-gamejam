@@ -40,6 +40,7 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
+        playerTransform = FindObjectOfType<PlayerMovement>().transform;
         Vector2 offset = Random.insideUnitCircle * maxOffset;
         targetPosition = (Vector2)playerTransform.position + offset;
 
@@ -170,20 +171,26 @@ public class EnemyAI : MonoBehaviour
                     }
                     else if (gunType.ToLower() == "uzi")
                     {
-                        for (int i = 0; i < 4; i++)
-                        {
-                            float spread = Random.Range(-1.5f, 1.5f);
-
-                            GameObject bullet = Instantiate(bulletPrefab, shotPos.position, gun.transform.rotation);
-                            Vector2 direction = (playerTransform.position - shotPos.position).normalized;
-                            direction.x += spread;
-                            bullet.GetComponent<Rigidbody2D>().velocity = direction * bullet.GetComponent<Bullet>().speed;
-                        }
+                        StartCoroutine(ShootUzi());
                     }
 
                     shootCooldown = Time.time + shootCooldownDuration;
                 }
             }
+        }
+    }
+    IEnumerator ShootUzi()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            float spread = Random.Range(-1.5f, 1.5f);
+
+            yield return new WaitForSeconds(0.1f);
+
+            GameObject bullet = Instantiate(bulletPrefab, shotPos.position, gun.transform.rotation);
+            Vector2 direction = (playerTransform.position - shotPos.position).normalized;
+            direction.x += spread;
+            bullet.GetComponent<Rigidbody2D>().velocity = direction * bullet.GetComponent<Bullet>().speed;
         }
     }
 }

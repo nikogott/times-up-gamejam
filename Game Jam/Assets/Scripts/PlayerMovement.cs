@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb2d;
     private SpriteRenderer sprite;
-    
+
     public float mana;
 
     public Transform weapon;
@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
 
     Animator anim;
 
+    [SerializeField] AudioSource footSteps;
+
     [SerializeField] ParticleSystem dustParticles;
     [SerializeField] ParticleSystem dashParticles;
 
@@ -36,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
     GameObject weaponObj;
 
     public bool isDashing = false;
+
+    public bool isTutorial = false;
 
     void Start()
     {
@@ -50,12 +54,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(Time.timeScale < 1 && speed < constantSpeed * 10)
+        if (Time.timeScale < 1 && speed < constantSpeed * 10)
         {
             speed *= 10;
         }
 
-        if(Time.timeScale == 1 && speed != constantSpeed)
+        if (Time.timeScale == 1 && speed != constantSpeed)
         {
             speed = constantSpeed;
         }
@@ -63,6 +67,12 @@ public class PlayerMovement : MonoBehaviour
         manaBar.SetMana(mana);
 
         currentSpeed = rb2d.velocity.SqrMagnitude();
+
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        {
+            footSteps.Play();
+        }
+
 
         var deltaX = Input.GetAxisRaw("Horizontal");
         var deltaY = Input.GetAxisRaw("Vertical");
@@ -80,12 +90,12 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    
+
     private void Update()
     {
         anim.SetFloat("speed", currentSpeed);
 
-        if(timer > 0)
+        if (timer > 0)
         {
             timer -= 1 * Time.deltaTime;
         }
@@ -106,9 +116,9 @@ public class PlayerMovement : MonoBehaviour
             dustParticles.Stop();
         }
 
-        if (Input.GetKeyDown("f") && timer <= 0 && mana > 24)
+        if (Input.GetMouseButtonDown(1) && timer <= 0 && mana > 24)
         {
-            if (Input.GetKeyDown("f") && timer <= 0 && mana > 24)
+            if (Input.GetMouseButtonDown(1) && timer <= 0 && mana > 24)
             {
                 Vector3 mousePosScreen = Input.mousePosition;
                 Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(new Vector3(mousePosScreen.x, mousePosScreen.y, transform.position.z - Camera.main.transform.position.z));
@@ -147,10 +157,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Blood"))
+        if (collision.CompareTag("Blood"))
         {
-            if(mana < 98)
-            mana += 3;
+            if (mana < 98)
+                mana += 3;
+        }
+        if(collision.CompareTag("SeithHolder"))
+        {
+            FindObjectOfType<PlayerAttack>().enabled = true;
+            FindObjectOfType<WeaponMovement>().enabled = true;
+            FindObjectOfType<WeaponMovement>().GetComponent<Collider2D>().enabled = false;
         }
     }
 

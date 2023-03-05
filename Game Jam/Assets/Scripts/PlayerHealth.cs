@@ -13,8 +13,13 @@ public class PlayerHealth : MonoBehaviour
     float timer = 0;
 
     [SerializeField] GameObject deathMenu;
+    [SerializeField] GameObject winMenu;
 
     [SerializeField] GameObject[] hearts;
+
+    [SerializeField] AudioSource deathSfx;
+    [SerializeField] AudioSource winSfx;
+
 
     void Start()
     {
@@ -53,7 +58,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Bullet"))
+        if (collision.CompareTag("Bullet") || collision.CompareTag("Explosion"))
         {
             TakeDamage(1);
         }
@@ -109,9 +114,16 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-    void Death()
+    public void Death()
     {
+        deathSfx.Play();
         Time.timeScale = 0;
         deathMenu.SetActive(true);
+    }
+    public void Win()
+    {
+        //winSfx.Play();
+        Time.timeScale = 0;
+        winMenu.SetActive(true);
     }
 }

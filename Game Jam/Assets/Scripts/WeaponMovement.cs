@@ -11,6 +11,7 @@ public class WeaponMovement : MonoBehaviour
     [SerializeField] GameObject seith;
     private Camera mainCamera;
 
+
     private void Start()
     {
         constantSpeed = rotationSpeed;

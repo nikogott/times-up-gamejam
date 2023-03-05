@@ -30,20 +30,24 @@ public class ExplosiveBarrel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Bullet"))
+        if (collision.CompareTag("Bullet") || collision.CompareTag("Seith"))
         {
             if (!isExploded)
             {
                 StartCoroutine(Explode());
             }
         }
-        if (collision.CompareTag("Seith"))
+        if (collision.CompareTag("Explosion"))
         {
-            if (!isExploded)
-            {
-                StartCoroutine(Explode());
-            }
+            Invoke("ExplodeDelay", 0.2f);
+
         }
+    }
+
+    void ExplodeDelay()
+    {
+        StartCoroutine(Explode());
+
     }
 
     IEnumerator Explode()

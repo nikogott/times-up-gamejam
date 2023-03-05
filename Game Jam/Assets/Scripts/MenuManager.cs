@@ -11,6 +11,8 @@ public class MenuManager : MonoBehaviour
     public bool shouldPause = false;
     bool isPaused = false;
 
+    public bool isGame = false;
+
     private void Update()
     {
         if (shouldPause && Input.GetKeyDown(KeyCode.Escape))
@@ -30,6 +32,11 @@ public class MenuManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void NextLevel()
+    {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name + 1);
     }
 
     public void StartGame()
@@ -59,7 +66,7 @@ public class MenuManager : MonoBehaviour
     public void LoadLevel(int level)
     {
         loadingPanel.SetActive(true);
-        SceneManager.LoadScene(level);
+        SceneManager.LoadScene(level + 1);
     }
     public void Pause()
     {

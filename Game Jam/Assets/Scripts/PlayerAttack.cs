@@ -27,10 +27,13 @@ public class PlayerAttack : MonoBehaviour
             sandClock = FindObjectOfType<Sandclock>();
         }
 
-        if (Time.timeScale != 1 && speed < constantSpeed + 3 && sandClock.timeIsSlowed)
+        if (sandClock != null)
         {
-            speed += 3;
-            anim.speed += speed;
+            if (Time.timeScale != 1 && speed < constantSpeed + 3 && sandClock.timeIsSlowed)
+            {
+                speed += 3;
+                anim.speed += speed;
+            }
         }
 
         if (Time.timeScale == 1 && speed != constantSpeed && !sandClock.timeIsSlowed)

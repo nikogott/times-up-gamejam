@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 260288966820826828}
   - component: {fileID: 1415884303593229948}
   - component: {fileID: 1415884303593229949}
+  - component: {fileID: 1384115241}
   m_Layer: 0
   m_Name: barrel explosive
   m_TagString: Barrel
@@ -209,7 +210,7 @@ MonoBehaviour:
   - {x: -0.2379303, y: -0.99042606, z: 0}
   m_ShapePathHash: -1457668033
   m_Mesh: {fileID: 0}
-  m_InstanceId: -71166
+  m_InstanceId: -73000
   m_LocalBounds:
     m_Center: {x: 0.001490593, y: -0.00081801414, z: 0}
     m_Extent: {x: 0.56219673, y: 0.99315476, z: 0}
@@ -248,3 +249,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!50 &1384115241
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260288966820826816}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 500
+  m_LinearDrag: 0
+  m_AngularDrag: 300
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

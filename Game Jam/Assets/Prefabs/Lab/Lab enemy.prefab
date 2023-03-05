@@ -697,6 +697,12 @@ MonoBehaviour:
   bloodObj: {fileID: 432044983975113903, guid: 0aa93a4d8bc6fa646afa3a6148fd353f, type: 3}
   kbForce: 1
   deathParticles: {fileID: 7169062369480967953, guid: 37240a8ba24c03848a01016962fe071c, type: 3}
+  gadgets:
+  - {fileID: 4603584258670637405, guid: b1979e43b3c74b9409896f9c2407c97d, type: 3}
+  - {fileID: 2647100000655188188, guid: 7a59b915aeb960443b6661cdcfafef00, type: 3}
+  - {fileID: 1596746958049622440, guid: 3a891b9512238894d93f693436c88680, type: 3}
+  - {fileID: 5310269728504923817, guid: 0b2d0c6dd4384de478f808f9a4d6bb0d, type: 3}
+  - {fileID: 249009566097440474, guid: 5558a4060c054ae4eab6f934d00151fb, type: 3}
   seith: {fileID: 0}
 --- !u!114 &342582094
 MonoBehaviour:
@@ -730,7 +736,7 @@ MonoBehaviour:
   - {x: -0.2027696, y: -0.34874126, z: 0}
   m_ShapePathHash: -1933030726
   m_Mesh: {fileID: 0}
-  m_InstanceId: 104406
+  m_InstanceId: -254996
   m_LocalBounds:
     m_Center: {x: 0.007080257, y: -0.005874604, z: 0}
     m_Extent: {x: 0.39552516, y: 0.46038064, z: 0}
