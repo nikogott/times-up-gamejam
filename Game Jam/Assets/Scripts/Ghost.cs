@@ -9,6 +9,7 @@ public class Ghost : MonoBehaviour
     private bool isActivated = false;
     public float effectDuration = 5f;
     float ogLensDisStrength;
+    float ogShootingRange;
 
     private PlayerMovement player;
 
@@ -40,6 +41,7 @@ public class Ghost : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             ogDetectionRange = enemy.GetComponent<EnemyAI>().detectionRange;
+            ogShootingRange = enemy.GetComponent<EnemyAI>().shootingRange;
             ogMoveSpeed = enemy.GetComponent<EnemyAI>().moveSpeed;
 
         }
@@ -84,6 +86,7 @@ public class Ghost : MonoBehaviour
         {
             enemy.GetComponent<EnemyAI>().detectionRange = 0;
             enemy.GetComponent<EnemyAI>().moveSpeed = 0;
+            enemy.GetComponent<EnemyAI>().shootingRange = 0;
         }
 
         yield return new WaitForSeconds(effectDuration);
@@ -93,6 +96,7 @@ public class Ghost : MonoBehaviour
         {
             enemy.GetComponent<EnemyAI>().detectionRange = ogDetectionRange;
             enemy.GetComponent<EnemyAI>().moveSpeed = ogMoveSpeed;
+            enemy.GetComponent<EnemyAI>().shootingRange = ogShootingRange;
         }
 
         color.a = 1f;

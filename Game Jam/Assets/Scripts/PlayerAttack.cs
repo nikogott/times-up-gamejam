@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     public float speed = 1;
     private float constantSpeed = 1;
     CapsuleCollider2D coll;
+    Sandclock sandClock;
     void Start()
     {
         coll = GetComponent<CapsuleCollider2D>();
@@ -21,13 +22,18 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale != 1 && speed < constantSpeed + 3)
+        if (FindObjectOfType<Sandclock>() != null)
+        {
+            sandClock = FindObjectOfType<Sandclock>();
+        }
+
+        if (Time.timeScale != 1 && speed < constantSpeed + 3 && sandClock.timeIsSlowed)
         {
             speed += 3;
             anim.speed += speed;
         }
 
-        if (Time.timeScale == 1 && speed != constantSpeed)
+        if (Time.timeScale == 1 && speed != constantSpeed && !sandClock.timeIsSlowed)
         {
             speed = constantSpeed;
             anim.speed = speed;

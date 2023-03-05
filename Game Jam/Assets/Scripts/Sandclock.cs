@@ -11,6 +11,8 @@ public class Sandclock : MonoBehaviour
     private float fixedDeltaTime;
     private bool isActivated = false;
 
+    public bool timeIsSlowed = false;
+
     [SerializeField] Light2D light;
 
     void Start()
@@ -34,6 +36,7 @@ public class Sandclock : MonoBehaviour
     {
         if (!isActivated && other.CompareTag("Player"))
         {
+            timeIsSlowed = true;
             isActivated = true;
             Time.timeScale = slowdownFactor;
             Time.fixedDeltaTime = fixedDeltaTime * slowdownFactor;
@@ -49,6 +52,7 @@ public class Sandclock : MonoBehaviour
 
         Time.timeScale = 1f;
         Time.fixedDeltaTime = fixedDeltaTime;
+        timeIsSlowed = false;
         Destroy(gameObject);
     }
 
