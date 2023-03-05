@@ -51,13 +51,11 @@ public class DialogueManager : MonoBehaviour
 
 		if (isJeff)
 		{
-			name = "Jeff";
-			nameText.text = name;
+			nameText.text = "Jeff";
 		}
 		else
 		{
-			name = "Uncle";
-			nameText.text = name;
+			nameText.text = "Uncle";
 		}
 
 		if (sentences.Count == 0)
