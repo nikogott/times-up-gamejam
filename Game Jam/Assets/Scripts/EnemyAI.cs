@@ -30,9 +30,13 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField] Transform pistolShotPos;
     [SerializeField] Transform shotgunShotPos;
+    [SerializeField] Transform uziShotPos;
 
     [SerializeField] GameObject pistol;
     [SerializeField] GameObject shotgun;
+    [SerializeField] GameObject uzi;
+
+    SpriteRenderer sr;
 
     void Start()
     {
@@ -51,11 +55,12 @@ public class EnemyAI : MonoBehaviour
             shotgun.SetActive(true);
             shotPos = shotgunShotPos;
         }
+        sr = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        if(timer > 0)
+        if (timer > 0)
         {
             timer -= Time.deltaTime;
         }
@@ -68,6 +73,39 @@ public class EnemyAI : MonoBehaviour
             {
                 Vector2 direction = (playerTransform.position - gun.position).normalized;
                 gun.right = direction;
+
+                if (direction.x < 0)
+                {
+                    sr.flipX = true;
+                    if (gunType.ToLower() == "pistol")
+                    {
+                        pistol.GetComponent<SpriteRenderer>().flipY = true;
+                    }
+                    else if (gunType.ToLower() == "shotgun")
+                    {
+                        pistol.GetComponent<SpriteRenderer>().flipY = true;
+                    }
+                    else if (gunType.ToLower() == "uzi")
+                    {
+                        //  uzi.GetComponent<SpriteRenderer>().flipY = true;
+                    }
+                }
+                else if (direction.x > 0)
+                {
+                    sr.flipX = false;
+                    if (gunType.ToLower() == "pistol")
+                    {
+                        pistol.GetComponent<SpriteRenderer>().flipY = true;
+                    }
+                    else if (gunType.ToLower() == "shotgun")
+                    {
+                        pistol.GetComponent<SpriteRenderer>().flipY = true;
+                    }
+                    else if (gunType.ToLower() == "uzi")
+                    {
+                        //  uzi.GetComponent<SpriteRenderer>().flipY = true;
+                    }
+                }
 
                 canShoot = (distanceToPlayer < shootingRange);
 
@@ -92,6 +130,7 @@ public class EnemyAI : MonoBehaviour
                     gun.rotation = Quaternion.Lerp(gun.rotation, Quaternion.identity, 0.1f);
                 }
             }
+
 
             if (canShoot)
             {

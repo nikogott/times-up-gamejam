@@ -18,6 +18,7 @@ public class CameraShake : MonoBehaviour
 
     public IEnumerator Shake()
     {
+        camFollow.speed /= 7f;
 
         int shakeTimes = Random.Range(4, 8);
 
@@ -32,7 +33,7 @@ public class CameraShake : MonoBehaviour
 
             while (elapsedTime < randomTime)
             {
-                transform.position = Vector3.Lerp(transform.position, targetPosition, elapsedTime / randomTime);
+                transform.position = Vector3.Lerp(transform.position, targetPosition, (elapsedTime / randomTime));
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
@@ -41,6 +42,6 @@ public class CameraShake : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
-        camFollow.enabled = true;
+        camFollow.speed *= 7f;
     }
 }
