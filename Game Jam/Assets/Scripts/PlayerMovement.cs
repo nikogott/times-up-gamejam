@@ -168,6 +168,10 @@ public class PlayerMovement : MonoBehaviour
             FindObjectOfType<WeaponMovement>().enabled = true;
             FindObjectOfType<WeaponMovement>().GetComponent<Collider2D>().enabled = false;
         }
+        if (collision.CompareTag("Nametag"))
+        {
+            FindObjectOfType<MenuManager>().NextLevel();
+        }
     }
 
 }
