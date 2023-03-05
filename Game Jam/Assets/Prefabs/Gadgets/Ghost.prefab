@@ -204,5 +204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c15e46ec5eaab764c9c9012431a9c1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectDuration: 5
+  effectDuration: 1.5
+  isInvisible: 0
   light: {fileID: 1596746958049622447}

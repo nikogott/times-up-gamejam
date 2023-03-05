@@ -7,7 +7,6 @@ public class Heart : MonoBehaviour
 {
     private bool isActivated = false;
     public int healthGiven = 1;
-    public float effectDuration = 5f;
 
     private PlayerMovement player;
 

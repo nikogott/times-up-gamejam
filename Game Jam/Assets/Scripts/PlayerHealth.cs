@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public int battery;
     Animator anim;
     PlayerMovement playerMovement;
+    Ghost ghost;
 
     float timer = 0;
 
@@ -47,12 +48,12 @@ public class PlayerHealth : MonoBehaviour
             Death();
         }
 
-     //  batteryBar.SetBattery(battery);
+        //  batteryBar.SetBattery(battery);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Bullet") || collision.gameObject.CompareTag("Enemy"))
+        if (collision.CompareTag("Bullet"))
         {
             TakeDamage(1);
         }
@@ -60,8 +61,14 @@ public class PlayerHealth : MonoBehaviour
 
     void TakeDamage(int damage)
     {
+        if (FindObjectOfType<Ghost>() != null)
+            ghost = FindObjectOfType<Ghost>();
+
         if (!playerMovement.isDashing && timer <= 0)
         {
+            if (ghost != null && ghost.isInvisible)
+                return;
+
             anim.SetTrigger("hit");
             battery -= damage;
             timer = 0.5f;

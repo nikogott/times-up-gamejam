@@ -11,9 +11,12 @@ public class Ghost : MonoBehaviour
     float ogLensDisStrength;
     float ogShootingRange;
 
+    public bool isInvisible = false;
     private PlayerMovement player;
 
     [SerializeField] Light2D light;
+
+    Animator anim;
 
     Volume volume;
     LensDistortion lensDistortion;
@@ -33,7 +36,7 @@ public class Ghost : MonoBehaviour
         volume.profile.TryGet(out lensDistortion);
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
+        anim = GetComponent<Animator>();
         ogLensDisStrength = lensDistortion.intensity.value;
 
         player = FindObjectOfType<PlayerMovement>();
@@ -78,10 +81,8 @@ public class Ghost : MonoBehaviour
 
         GetComponent<SpriteRenderer>().enabled = false;
         light.enabled = false;
-        Color color = player.GetComponent<SpriteRenderer>().color;
-        color.a = 0.3f;
-        player.GetComponent<SpriteRenderer>().color = color;
-
+        player.GetComponent<Animator>().Play("player_ghost");
+        isInvisible = true;
         foreach (GameObject enemy in enemies)
         {
             enemy.GetComponent<EnemyAI>().detectionRange = 0;
@@ -99,8 +100,8 @@ public class Ghost : MonoBehaviour
             enemy.GetComponent<EnemyAI>().shootingRange = ogShootingRange;
         }
 
-        color.a = 1f;
-        player.GetComponent<SpriteRenderer>().color = color;
+        player.GetComponent<Animator>().Play("player_walk");
+        isInvisible = false;
         Time.timeScale = 1f;
 
         yield return new WaitForSeconds(0.5f);

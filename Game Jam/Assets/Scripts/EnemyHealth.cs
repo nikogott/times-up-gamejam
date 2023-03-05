@@ -13,6 +13,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] GameObject deathParticles;
     Animator anim;
 
+    public GameObject[] gadgets;
     private bool isDead = false;
     public GameObject seith;
     void Start()
@@ -34,6 +35,12 @@ public class EnemyHealth : MonoBehaviour
 
             isDead = true;
             spawnBlood();
+            int chance = Random.Range(1, 11);
+            Debug.Log(chance);
+            if (chance == 1) {
+                int dropItme = Random.Range(0, 5);
+                Instantiate(gadgets[dropItme], transform.position, Quaternion.identity);
+            }
         }
     }
 

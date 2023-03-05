@@ -55,6 +55,11 @@ public class EnemyAI : MonoBehaviour
             shotgun.SetActive(true);
             shotPos = shotgunShotPos;
         }
+        else if(gunType.ToLower() == "uzi")
+        {
+            uzi.SetActive(true);
+            shotPos = uziShotPos;
+        }
         sr = GetComponent<SpriteRenderer>();
     }
 
@@ -83,11 +88,11 @@ public class EnemyAI : MonoBehaviour
                     }
                     else if (gunType.ToLower() == "shotgun")
                     {
-                        pistol.GetComponent<SpriteRenderer>().flipY = true;
+                        shotgun.GetComponent<SpriteRenderer>().flipY = true;
                     }
                     else if (gunType.ToLower() == "uzi")
                     {
-                        //  uzi.GetComponent<SpriteRenderer>().flipY = true;
+                        uzi.GetComponent<SpriteRenderer>().flipY = true;
                     }
                 }
                 else if (direction.x > 0)
@@ -95,15 +100,15 @@ public class EnemyAI : MonoBehaviour
                     sr.flipX = false;
                     if (gunType.ToLower() == "pistol")
                     {
-                        pistol.GetComponent<SpriteRenderer>().flipY = true;
+                        pistol.GetComponent<SpriteRenderer>().flipY = false;
                     }
                     else if (gunType.ToLower() == "shotgun")
                     {
-                        pistol.GetComponent<SpriteRenderer>().flipY = true;
+                        shotgun.GetComponent<SpriteRenderer>().flipY = false;
                     }
                     else if (gunType.ToLower() == "uzi")
                     {
-                        //  uzi.GetComponent<SpriteRenderer>().flipY = true;
+                        uzi.GetComponent<SpriteRenderer>().flipY = false;
                     }
                 }
 
@@ -161,6 +166,19 @@ public class EnemyAI : MonoBehaviour
                             bullet.GetComponent<Rigidbody2D>().AddForce(gun.transform.right * bullet.GetComponent<Bullet>().speed, ForceMode2D.Impulse);
                             Destroy(bullet, 1f);
                         }
+                        fireTimer = fireRate;
+                    }
+                    else if (gunType.ToLower() == "uzi")
+                    {
+                        for (int i = 0; i < 4; i++)
+                        {
+                            float spread = Random.Range(-1.5f, 1.5f);
+
+                            GameObject bullet = Instantiate(bulletPrefab, shotPos.position, gun.transform.rotation);
+                            Vector2 direction = (playerTransform.position - shotPos.position).normalized;
+                            direction.x += spread;
+                            bullet.GetComponent<Rigidbody2D>().velocity = direction * bullet.GetComponent<Bullet>().speed;
+                        }
                     }
 
                     shootCooldown = Time.time + shootCooldownDuration;
@@ -168,5 +186,4 @@ public class EnemyAI : MonoBehaviour
             }
         }
     }
-
 }

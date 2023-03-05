@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 2
-  effectDuration: 5
+  effectDuration: 2
   light: {fileID: 4603584258670637402}
 --- !u!114 &4603584258670637402
 MonoBehaviour:
