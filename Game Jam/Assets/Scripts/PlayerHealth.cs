@@ -9,6 +9,8 @@ public class PlayerHealth : MonoBehaviour
     Animator anim;
     PlayerMovement playerMovement;
 
+    float timer = 0;
+
     [SerializeField] GameObject deathMenu;
 
     void Start()
@@ -17,6 +19,14 @@ public class PlayerHealth : MonoBehaviour
         anim = GetComponent<Animator>();
         battery = 75;
         batteryBar = FindObjectOfType<BatteryBar>();
+    }
+
+    private void Update()
+    {
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+        }    
     }
 
     private void FixedUpdate()
@@ -46,11 +56,12 @@ public class PlayerHealth : MonoBehaviour
 
     void TakeDamage(int damage)
     {
-
-        if (!playerMovement.isDashing)
+        
+        if (!playerMovement.isDashing && timer <= 0)
         {
             anim.SetTrigger("hit");
             battery -= damage;
+            timer = 0.5f;
         }
     }
 

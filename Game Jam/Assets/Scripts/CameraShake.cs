@@ -22,7 +22,6 @@ public class CameraShake : MonoBehaviour
 
         int shakeTimes = Random.Range(4, 8);
 
-        Vector3 originalPosition = transform.position;
 
         for (int i = 0; i < shakeTimes; i++)
         {
@@ -30,7 +29,7 @@ public class CameraShake : MonoBehaviour
             float elapsedTime = 0f;
 
             Vector3 randomOffset = new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0);
-            Vector3 targetPosition = originalPosition + randomOffset;
+            Vector3 targetPosition = transform.position + randomOffset;
 
             while (elapsedTime < randomTime)
             {
@@ -39,10 +38,9 @@ public class CameraShake : MonoBehaviour
                 yield return null;
             }
 
-            transform.position = originalPosition;
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         camFollow.enabled = true;
     }

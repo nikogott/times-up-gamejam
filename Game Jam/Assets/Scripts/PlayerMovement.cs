@@ -6,15 +6,17 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     public float speed = 5f;
+    public float constantSpeed = 5f;
 
     private Rigidbody2D rb2d;
     private SpriteRenderer sprite;
-
+    
     public float mana;
 
     public Transform weapon;
 
     private float currentSpeed;
+    public float dashSpeed;
 
     float elapsed = 0;
 
@@ -38,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         mana = 100;
-
+        constantSpeed = speed;
         rb2d = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -48,6 +50,15 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(Time.timeScale < 1 && speed < constantSpeed * 10)
+        {
+            speed *= 10;
+        }
+
+        if(Time.timeScale == 1 && speed != constantSpeed)
+        {
+            speed = constantSpeed;
+        }
 
         manaBar.SetMana(mana);
 
@@ -105,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
 
                 direction.Normalize();
 
-                float speed = 16f;
+                float speed = dashSpeed;
                 Vector3 velocity = direction * speed;
 
                 rb2d.velocity = velocity;
@@ -138,8 +149,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if(collision.CompareTag("Blood"))
         {
-            if(mana < 100)
-            mana += 5;
+            if(mana < 98)
+            mana += 3;
         }
     }
 

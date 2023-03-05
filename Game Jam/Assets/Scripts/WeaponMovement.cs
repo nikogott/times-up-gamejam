@@ -18,7 +18,7 @@ public class WeaponMovement : MonoBehaviour
     }
     void Update()
     {
-       // transform.position = player.transform.position;
+        transform.position = player.transform.position;
 
         Vector3 mousePosScreen = Input.mousePosition;
         Vector3 mousePosWorld = mainCamera.ScreenToWorldPoint(new Vector3(mousePosScreen.x, mousePosScreen.y, transform.position.z - mainCamera.transform.position.z));

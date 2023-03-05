@@ -13,6 +13,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] GameObject deathParticles;
     Animator anim;
 
+    private bool isDead = false;
     public GameObject seith;
     void Start()
     {
@@ -27,22 +28,18 @@ public class EnemyHealth : MonoBehaviour
         {
             timer -= Time.deltaTime;
         }
-        if (health <= 0)
+        if (health == 0 && !isDead)
         {
             anim.SetTrigger("death");
 
-            shouldSpawnBlood = true;
-            if (shouldSpawnBlood)
-            {
-                spawnBlood();
-                shouldSpawnBlood = false;
-            }
+            isDead = true;
+            spawnBlood();
         }
     }
 
     void spawnBlood()
     {
-        int bloodAmount = Random.Range(2, 5);
+        int bloodAmount = Random.Range(4, 11);
 
 
         for (int i = 0; i <= bloodAmount; i++)
@@ -53,13 +50,7 @@ public class EnemyHealth : MonoBehaviour
 
         }
         Instantiate(deathParticles, transform.position, Quaternion.identity);
-        Destroy(gameObject, 0.25f);
-    }
-
-    public void ApplyKnockback(Vector2 direction, float force)
-    {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(-direction * force, ForceMode2D.Impulse);
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -80,7 +71,6 @@ public class EnemyHealth : MonoBehaviour
             anim.SetTrigger("hit");
             health -= 1;
             timer = 1f;
-            ApplyKnockback(player.gameObject.transform.position, kbForce);
         }
     }
 
