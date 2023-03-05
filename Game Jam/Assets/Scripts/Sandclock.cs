@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Sandclock : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Sandclock : MonoBehaviour
 
     private float fixedDeltaTime;
     private bool isActivated = false;
+
+    [SerializeField] Light2D light;
 
     void Start()
     {
@@ -41,6 +44,7 @@ public class Sandclock : MonoBehaviour
     private IEnumerator DeactivateEffect()
     {
         GetComponent<SpriteRenderer>().enabled = false;
+        light.enabled = false;
         yield return new WaitForSeconds(effectDuration);
 
         Time.timeScale = 1f;

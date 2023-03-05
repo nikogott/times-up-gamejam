@@ -45,9 +45,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.04429624}
+  m_Offset: {x: 0, y: -0.010916113}
   serializedVersion: 2
-  m_Radius: 2.8253944
+  m_Radius: 3.4373622
 --- !u!1 &260288966820826816
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,7 +209,7 @@ MonoBehaviour:
   - {x: -0.2379303, y: -0.99042606, z: 0}
   m_ShapePathHash: -1457668033
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1282
+  m_InstanceId: -71166
   m_LocalBounds:
     m_Center: {x: 0.001490593, y: -0.00081801414, z: 0}
     m_Extent: {x: 0.56219673, y: 0.99315476, z: 0}

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     BatteryBar batteryBar;
-    public float battery;
+    public int battery;
     Animator anim;
     PlayerMovement playerMovement;
 
@@ -13,12 +13,21 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] GameObject deathMenu;
 
+    [SerializeField] GameObject[] hearts;
+
     void Start()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
         anim = GetComponent<Animator>();
-        battery = 75;
-        batteryBar = FindObjectOfType<BatteryBar>();
+        battery = 3;
+        //    batteryBar = FindObjectOfType<BatteryBar>();
+
+
+        for (int i = 0; i < 3; i++)
+        {
+            hearts[i].SetActive(true);
+        }
+
     }
 
     private void Update()
@@ -26,44 +35,72 @@ public class PlayerHealth : MonoBehaviour
         if (timer > 0)
         {
             timer -= Time.deltaTime;
-        }    
+        }
     }
 
     private void FixedUpdate()
     {
+
+
         if (battery <= 0)
         {
             Death();
         }
 
-        batteryBar.SetBattery(battery);
+     //  batteryBar.SetBattery(battery);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Enemy"))
-        {
-            TakeDamage(25);
-        }
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Bullet") || collision.gameObject.CompareTag("Enemy"))
+        if (collision.CompareTag("Bullet") || collision.gameObject.CompareTag("Enemy"))
         {
-            TakeDamage(25);
+            TakeDamage(1);
         }
     }
 
     void TakeDamage(int damage)
     {
-        
         if (!playerMovement.isDashing && timer <= 0)
         {
             anim.SetTrigger("hit");
             battery -= damage;
             timer = 0.5f;
+
+            for (int i = 0; i < hearts.Length; i++)
+            {
+                if (i < battery)
+                {
+                    hearts[i].SetActive(true);
+                }
+                else
+                {
+                    hearts[i].SetActive(false);
+                }
+            }
         }
     }
+
+    public void GetHealth(int health)
+    {
+        if (timer <= 0)
+        {
+            battery += health;
+            timer = 0.5f;
+
+            for (int i = 0; i < hearts.Length; i++)
+            {
+                if (i < battery)
+                {
+                    hearts[i].SetActive(true);
+                }
+                else
+                {
+                    hearts[i].SetActive(false);
+                }
+            }
+        }
+    }
+
 
     void Death()
     {

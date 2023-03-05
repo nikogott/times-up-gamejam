@@ -21,16 +21,16 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale != 1 && speed < constantSpeed * 25)
+        if (Time.timeScale != 1 && speed < constantSpeed + 3)
         {
-            speed *= 25;
-            anima["player_hit"].speed = speed;
+            speed += 3;
+            anim.speed += speed;
         }
 
         if (Time.timeScale == 1 && speed != constantSpeed)
         {
             speed = constantSpeed;
-            anima["player_hit"].speed = speed;
+            anim.speed = speed;
         }
 
         if (timer > 0)

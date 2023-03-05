@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class Boots : MonoBehaviour
+public class Heart : MonoBehaviour
 {
     private bool isActivated = false;
-    public float speedMultiplier = 2;
+    public int healthGiven = 1;
     public float effectDuration = 5f;
 
     private PlayerMovement player;
@@ -22,20 +22,15 @@ public class Boots : MonoBehaviour
         if (!isActivated && other.CompareTag("Player"))
         {
             isActivated = true;
-            player.speed *= speedMultiplier;
-            Time.timeScale = 1.01f;
-            StartCoroutine(DeactivateEffect());
+
+            player.GetComponent<PlayerHealth>().GetHealth(healthGiven);
+            GetComponent<SpriteRenderer>().enabled = false;
+            light.enabled = false;
+
+            Time.timeScale = 1f;
+            Destroy(gameObject);
         }
     }
 
-    private IEnumerator DeactivateEffect()
-    {
-        GetComponent<SpriteRenderer>().enabled = false;
-        light.enabled = false;
-        yield return new WaitForSeconds(effectDuration);
 
-        Time.timeScale = 1f;
-        player.speed /= speedMultiplier;        
-        Destroy(gameObject);
-    }
 }

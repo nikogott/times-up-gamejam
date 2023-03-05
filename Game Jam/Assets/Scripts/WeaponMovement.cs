@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponMovement : MonoBehaviour
 {
     public float rotationSpeed = 5f;
+    float constantSpeed;
 
     private PlayerMovement player;
     [SerializeField] GameObject seith;
@@ -12,12 +13,24 @@ public class WeaponMovement : MonoBehaviour
 
     private void Start()
     {
+        constantSpeed = rotationSpeed;
         player = FindObjectOfType<PlayerMovement>();
         transform.parent = null;
         mainCamera = Camera.main;
     }
     void Update()
     {
+
+        if (Time.timeScale != 1 && rotationSpeed < constantSpeed * 2)
+        {
+            rotationSpeed *= 2;
+        }
+
+        if (Time.timeScale == 1 && rotationSpeed != constantSpeed)
+        {
+            rotationSpeed = constantSpeed;
+        }
+
         transform.position = player.transform.position;
 
         Vector3 mousePosScreen = Input.mousePosition;

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Rendering.Universal;
 public class Dash : MonoBehaviour
 {
     private bool isActivated = false;
@@ -9,6 +9,8 @@ public class Dash : MonoBehaviour
     public float effectDuration = 5f;
 
     private PlayerMovement player;
+
+    [SerializeField] Light2D light;
 
     private void Start()
     {
@@ -27,6 +29,7 @@ public class Dash : MonoBehaviour
     private IEnumerator DeactivateEffect()
     {
         GetComponent<SpriteRenderer>().enabled = false;
+        light.enabled = false;
         yield return new WaitForSeconds(effectDuration);
 
         player.dashSpeed /= speedMultiplier;

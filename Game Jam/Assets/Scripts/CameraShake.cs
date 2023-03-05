@@ -18,7 +18,6 @@ public class CameraShake : MonoBehaviour
 
     public IEnumerator Shake()
     {
-        camFollow.enabled = false;
 
         int shakeTimes = Random.Range(4, 8);
 
