@@ -29,7 +29,7 @@ Move fast, fight smart, and survive the clock — because when time’s up, your
 ## 🛠 Tech Stack
 
 - **Unity (C#)**
-- **Aseprite** (Pixel Art – by teammate)
+- **Aseprite** (Pixel Art)
 - **Git** (Version Control & Collaboration)
 
 ---
